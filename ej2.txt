@@ -1,0 +1,43 @@
+**********Ejercicio 2**********
+
+*Cargamos la base de datos
+
+use "#Ruta de tu archivo", clear
+
+describe
+sum
+pwcorr favwin spread
+
+*b) Primero estimamos el modelo con MCO 
+*con errores estandar usuales
+
+regress favwin spread
+
+*Prueba de hipotesis H_0 = 0 vs H_0 != 0 con estadistica t 
+*t
+display(0.5769492 - 0.5)/(0.0282345)
+
+*t_a/2 cuantil
+di invttail(551, 0.0975)
+
+*con errores estandar robustos
+regress favwin spread, vce(robust)
+
+*Prueba de hipotesis H_0:  B_0 = 0.5 vs H_a: B_a != 0.5 con estadistica t 
+*t
+display(0.5769492 - 0.5)/(0.0316568)
+
+*puedes usar la siguiente prueba para contrastar H_0:  B_0= 0.5 de manera mas practica
+test _cons=0.5
+
+*c)
+display 0.5769492 + 0.0193655*10
+
+*d)modelo probit ajustado
+probit favwin spread
+*Prueba de hipotesis H_0:  B_0 = 0
+test _cons=0
+
+*e)
+*/ predictor lineal del probit/*
+display -0.0105926 + 0.092463*10 
